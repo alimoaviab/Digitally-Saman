@@ -2,16 +2,16 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { FiArrowRight, FiTarget, FiTrendingUp, FiBriefcase } from 'react-icons/fi';
+import { FiArrowRight, FiTarget, FiTrendingUp, FiBriefcase, FiMusic, FiShoppingBag, FiMessageSquare } from 'react-icons/fi';
 import MagneticButton from './MagneticButton';
 import AnimatedCounter from './AnimatedCounter';
 
 const badges = [
-  '📈 Meta and Google Ads',
-  '🎵 TikTok Ads',
-  '🛍 Shopify',
-  '🎯 Lead Gen',
-  '📱 Social Media',
+  { text: 'Meta and Google Ads', icon: <FiTrendingUp className="h-3.5 w-3.5 text-[#ff758f] shrink-0" /> },
+  { text: 'TikTok Ads', icon: <FiMusic className="h-3.5 w-3.5 text-[#ff758f] shrink-0" /> },
+  { text: 'Shopify', icon: <FiShoppingBag className="h-3.5 w-3.5 text-[#ff758f] shrink-0" /> },
+  { text: 'Lead Gen', icon: <FiTarget className="h-3.5 w-3.5 text-[#ff758f] shrink-0" /> },
+  { text: 'Social Media', icon: <FiMessageSquare className="h-3.5 w-3.5 text-[#ff758f] shrink-0" /> },
 ];
 
 const stats = [
@@ -111,8 +111,9 @@ export default function Hero() {
             transition={{ delay: 0.3 }}
           >
             {badges.map((badge, idx) => (
-              <span key={idx} className="text-xs px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/5 font-sans font-medium text-white/90">
-                {badge}
+              <span key={idx} className="inline-flex items-center gap-1.5 text-xs px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/5 font-sans font-medium text-white/90">
+                {badge.icon}
+                {badge.text}
               </span>
             ))}
           </motion.div>

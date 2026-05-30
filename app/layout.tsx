@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Poppins, Plus_Jakarta_Sans } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 import SmoothScroll from '@/components/SmoothScroll';
 import CustomCursor from '@/components/CustomCursor';
@@ -7,13 +7,7 @@ import CustomCursor from '@/components/CustomCursor';
 const poppins = Poppins({
   variable: '--font-poppins',
   subsets: ['latin'],
-  weight: ['400', '600', '700', '800', '900'],
-  display: 'swap',
-});
-
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: '--font-plus-jakarta',
-  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
   display: 'swap',
 });
 
@@ -80,7 +74,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${poppins.variable} scroll-smooth`}
+      className={`${poppins.variable} scroll-smooth`}
     >
       <body className="min-h-screen text-white bg-[#03001e] antialiased">
         <SmoothScroll>
