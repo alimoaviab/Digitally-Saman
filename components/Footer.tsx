@@ -1,26 +1,21 @@
 'use client';
 
-import { FiArrowUp, FiInstagram, FiFacebook, FiMail, FiPhone } from 'react-icons/fi';
+import { FiArrowUp, FiInstagram, FiFacebook, FiLinkedin, FiMail, FiPhone } from 'react-icons/fi';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 const quickLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Services', href: '#services' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Portfolio', href: '#portfolio' },
-  { name: 'Testimonials', href: '#testimonials' },
-  { name: 'Certifications', href: '#certifications' },
-  { name: 'Contact', href: '#contact' },
-];
-
-const services = [
-  { name: 'Social Media Management', href: '#services' },
-  { name: 'Performance Marketing', href: '#services' },
-  { name: 'Shopify Store Management', href: '#services' },
-  { name: 'Lead Generation & Outreach', href: '#services' },
+  { name: 'About', href: '/#about' },
+  { name: 'Services', href: '/#services' },
+  { name: 'Why Me', href: '/#why-me' },
+  { name: 'Process', href: '/#process' },
+  { name: 'Our Work', href: '/work' },
+  { name: 'Contact', href: '/#contact' },
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -29,14 +24,16 @@ export default function Footer() {
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const targetId = href.substring(1);
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      window.scrollTo({
-        top: targetElement.offsetTop - 80,
-        behavior: 'smooth',
-      });
+    if (href.startsWith('/#') && pathname === '/') {
+      e.preventDefault();
+      const targetId = href.substring(2);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth',
+        });
+      }
     }
   };
 
@@ -51,12 +48,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16">
           
           {/* Logo & Narrative Column */}
-          <div className="lg:col-span-5 flex flex-col justify-start">
+          <div className="lg:col-span-6 flex flex-col justify-start">
             <span className="font-display font-bold text-2xl tracking-tight text-white mb-6">
               Digitally <span className="text-[#ff758f]">Saman</span>
             </span>
             <p className="font-sans text-xs text-white/50 leading-relaxed max-w-sm mb-6">
-              I translate consumer behavior and analytical metrics into sustainable revenue pipelines. Digital growth engineered through cognitive principles.
+              Boost ROI · Measurable Results · Fuel Growth
             </p>
             {/* Social channels */}
             <div className="flex gap-3">
@@ -78,40 +75,31 @@ export default function Footer() {
               >
                 <FiFacebook className="h-4 w-4" />
               </a>
+              <a
+                href="https://linkedin.com/in/samannaz-digitalmarketer"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-blue-700 hover:text-white transition-all cursor-pointer border border-white/5"
+                aria-label="LinkedIn Profile"
+              >
+                <FiLinkedin className="h-4 w-4" />
+              </a>
             </div>
           </div>
 
           {/* Quick Links Column */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <h4 className="text-xs uppercase font-bold text-white tracking-widest mb-6">Navigation</h4>
             <ul className="space-y-3.5">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a
+                  <Link
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
                     className="font-sans text-xs text-white/60 hover:text-[#ff758f] transition-colors cursor-pointer"
                   >
                     {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services Column */}
-          <div className="lg:col-span-2">
-            <h4 className="text-xs uppercase font-bold text-white tracking-widest mb-6">Services</h4>
-            <ul className="space-y-3.5">
-              {services.map((service) => (
-                <li key={service.name}>
-                  <a
-                    href={service.href}
-                    onClick={(e) => handleNavClick(e, service.href)}
-                    className="font-sans text-xs text-white/60 hover:text-[#ff758f] transition-colors cursor-pointer"
-                  >
-                    {service.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -119,7 +107,7 @@ export default function Footer() {
 
           {/* Contact Details Column */}
           <div className="lg:col-span-3">
-            <h4 className="text-xs uppercase font-bold text-white tracking-widest mb-6">Contact</h4>
+            <h4 className="text-xs uppercase font-bold text-white tracking-widest mb-6">Contact Details</h4>
             <ul className="space-y-3.5">
               <li className="flex items-center gap-2.5 text-xs text-white/60">
                 <FiMail className="h-4 w-4 text-[#ff758f] shrink-0" />
@@ -145,7 +133,7 @@ export default function Footer() {
         {/* Bottom copyright & Scroll top */}
         <div className="border-t border-white/5 pt-8 mt-4 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-[10px] text-white/40 font-sans tracking-wide">
-            © 2025 Digitally Saman. All Rights Reserved. Designed for premium brand growth.
+            © 2026 Digitally Saman. All rights reserved.
           </p>
 
           <button

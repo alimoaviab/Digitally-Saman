@@ -1,17 +1,17 @@
 import type { Metadata } from 'next';
-import { Inter, Outfit } from 'next/font/google';
+import { Syne, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import SmoothScroll from '@/components/SmoothScroll';
 import CustomCursor from '@/components/CustomCursor';
 
-const inter = Inter({
-  variable: '--font-inter',
+const syne = Syne({
+  variable: '--font-syne',
   subsets: ['latin'],
   display: 'swap',
 });
 
-const outfit = Outfit({
-  variable: '--font-outfit',
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: '--font-plus-jakarta',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -79,7 +79,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${outfit.variable} scroll-smooth`}
+      className={`${plusJakarta.variable} ${syne.variable} scroll-smooth`}
     >
       <body className="min-h-screen text-white bg-[#03001e] antialiased">
         <SmoothScroll>

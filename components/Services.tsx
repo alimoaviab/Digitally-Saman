@@ -5,31 +5,29 @@ import { FiUsers, FiAward, FiShoppingBag, FiMail, FiCheck } from 'react-icons/fi
 
 const services = [
   {
-    title: 'Social Media Management',
+    title: 'Social Media Management & Marketing',
     icon: <FiUsers className="h-6 w-6" />,
-    desc: 'Complete brand management to elevate your organic reach, create high-converting assets, and build active communities.',
+    desc: 'Full-service social media management — from creative graphic design and video editing to content posting, audience engagement, and page growth strategies.',
     features: [
-      'Graphic Design & Branding',
-      'Content Strategy & Scheduling',
-      'Short-Form Video Editing',
-      'Audience Engagement & Support',
-      'Customer Care & Page Moderation',
-      'Organic Page Growth Audits',
+      'Graphic Design',
+      'Video Editing',
+      'Content Posting',
+      'Engagement',
+      'Page Growth',
     ],
     borderGlow: 'hover:shadow-[0_0_30px_rgba(255,117,143,0.2)]',
     accentColor: '#ff758f',
   },
   {
-    title: 'Performance Marketing',
+    title: 'Performance Marketing (Google & TikTok Ads)',
     icon: <FiAward className="h-6 w-6" />,
-    desc: 'Data-driven paid ads campaigns tailored to generate immediate leads, sales, and high return on advertising spend (ROAS).',
+    desc: 'Expert-level paid advertising on Google Search, Display Networks, and TikTok. From campaign setup and optimization to conversions and retargeting — I make your budget work hard.',
     features: [
-      'Google Search & Display Ads',
-      'Meta (Facebook/Instagram) Ads',
-      'TikTok Ads & Video Creatives',
-      'Funnels & Campaign Optimization',
-      'Pixel & Conversion API Tracking',
-      'Advanced Audience Retargeting',
+      'Google Ads',
+      'TikTok Ads',
+      'Retargeting',
+      'Conversions',
+      'Optimization',
     ],
     borderGlow: 'hover:shadow-[0_0_30px_rgba(115,0,153,0.25)]',
     accentColor: '#730099',
@@ -37,29 +35,27 @@ const services = [
   {
     title: 'Shopify Store Management',
     icon: <FiShoppingBag className="h-6 w-6" />,
-    desc: 'End-to-end management of your Shopify store to optimize customer shopping journeys, visual appeal, and conversion rates.',
+    desc: 'Complete Shopify store management including product research, SEO-optimized product uploads, collection organization, and order handling — minus the design headaches.',
     features: [
-      'Trending Product Research',
-      'SEO Optimized Uploads & Copies',
-      'Store Architecture & Themes',
-      'Catalog & Collections Management',
-      'Order Logistics & Support',
-      'Funnels & Checkout Optimization',
+      'Product Research',
+      'SEO Titles',
+      'Product Upload',
+      'Order Handling',
+      'Collections',
     ],
     borderGlow: 'hover:shadow-[0_0_30px_rgba(255,0,127,0.2)]',
     accentColor: '#ff007f',
   },
   {
-    title: 'Lead Generation & Outreach',
+    title: 'Lead Generation & Outreach (B2B / B2C)',
     icon: <FiMail className="h-6 w-6" />,
-    desc: 'B2B outreach strategies designed to source high-quality potential clients, schedule meetings, and increase pipeline volume.',
+    desc: 'Strategic client hunting through cold email, LinkedIn outreach, and DM campaigns. I build qualified lead lists and set appointments that actually convert.',
     features: [
-      'Cold Email Outreach Funnels',
-      'LinkedIn Profile Optimization',
-      'Instagram / DM Lead Hunting',
-      'B2B Prospect List Building',
-      'Appointment Setting Systems',
-      'CRM System Workflows',
+      'Cold Email',
+      'LinkedIn',
+      'DM Outreach',
+      'Lead Lists',
+      'Appointment Setting',
     ],
     borderGlow: 'hover:shadow-[0_0_30px_rgba(157,78,221,0.2)]',
     accentColor: '#9d4edd',
@@ -110,8 +106,11 @@ export default function Services() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            High-Performance Growth Solutions
+            What I Do
           </motion.h2>
+          <p className="font-sans text-sm text-white/50 mt-4">
+            My Core Services
+          </p>
           <div className="h-1 w-20 bg-[#ff758f] mx-auto mt-4 rounded-full" />
         </div>
 
@@ -155,7 +154,7 @@ export default function Services() {
                 </div>
 
                 {/* Info Text */}
-                <h3 className="font-display font-extrabold text-2xl text-white mb-4" style={{ transform: 'translateZ(20px)' }}>
+                <h3 className="font-display font-extrabold text-2xl text-white mb-4 leading-snug" style={{ transform: 'translateZ(20px)' }}>
                   {service.title}
                 </h3>
                 <p className="font-sans text-sm text-white/60 leading-relaxed mb-8" style={{ transform: 'translateZ(10px)' }}>
@@ -164,15 +163,15 @@ export default function Services() {
 
                 {/* Features list */}
                 <div className="border-t border-white/5 pt-6 w-full" style={{ transform: 'translateZ(15px)' }}>
-                  <h4 className="text-xs uppercase font-bold text-white/50 tracking-wider mb-4">Inclusions & Deliverables</h4>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <h4 className="text-xs uppercase font-bold text-white/50 tracking-wider mb-4">Core Focus Areas</h4>
+                  <div className="flex flex-wrap gap-2">
                     {service.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2 text-xs text-white/70">
-                        <FiCheck className="h-4 w-4 text-[#ff758f] shrink-0" />
+                      <span key={feature} className="flex items-center gap-1.5 text-xs text-white/80 bg-white/5 border border-white/5 px-3 py-1.5 rounded-xl">
+                        <FiCheck className="h-3.5 w-3.5 text-[#ff758f] shrink-0" />
                         <span>{feature}</span>
-                      </li>
+                      </span>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </div>
             </motion.div>

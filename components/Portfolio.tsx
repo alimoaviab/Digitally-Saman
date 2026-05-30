@@ -2,85 +2,42 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiExternalLink, FiX, FiActivity, FiTarget, FiTrendingUp } from 'react-icons/fi';
+import { FiX, FiChevronLeft, FiChevronRight, FiZoomIn, FiArrowRight } from 'react-icons/fi';
+import MagneticButton from './MagneticButton';
 
-const categories = [
-  'All',
-  'Social Media Campaigns',
-  'Lead Generation Projects',
-  'Shopify Management',
-  'Digital Marketing Strategy',
+const previewImages = [
+  '/WhatsApp Image 2026-05-30 at 22.07.42 (2).jpeg',
+  '/WhatsApp Image 2026-05-30 at 22.07.42.jpeg',
+  '/WhatsApp Image 2026-05-30 at 22.07.43 (1).jpeg',
+  '/WhatsApp Image 2026-05-30 at 22.07.43 (2).jpeg',
 ];
-
-const projects = [
-  {
-    id: 1,
-    title: 'Skincare Organic Brand Rebuild',
-    category: 'Social Media Campaigns',
-    image: '/portfolio_smm.png',
-    desc: 'Complete social presence rebuild for a luxury cosmetics label, creating high-converting vertical video formats.',
-    metrics: [
-      { label: 'Reach Growth', value: '+148%', icon: <FiTrendingUp className="h-4 w-4" /> },
-      { label: 'Followers gained', value: '12.4k', icon: <FiActivity className="h-4 w-4" /> },
-      { label: 'Engagement Rate', value: '3.85%', icon: <FiTarget className="h-4 w-4" /> },
-    ],
-    challenge: 'The client faced stagnant follower growth and single-digit comment counts. Their visual aesthetic was inconsistent and failed to communicate their premium price point.',
-    solution: 'Designed a high-contrast psychological feed layout. Executed a CapCut-based reels strategy utilizing fast editing styles, matching typography, and behavioral pattern interrupts inside the first 3 seconds.',
-  },
-  {
-    id: 2,
-    title: 'B2B SaaS Mid-Market Pipeline',
-    category: 'Lead Generation Projects',
-    image: '/portfolio_leadgen.png',
-    desc: 'Automated multi-channel prospecting campaign utilizing cold email arrays and LinkedIn touchpoints.',
-    metrics: [
-      { label: 'Booked Discovery Calls', value: '120+', icon: <FiActivity className="h-4 w-4" /> },
-      { label: 'Outreach Open Rate', value: '22.8%', icon: <FiTarget className="h-4 w-4" /> },
-      { label: 'Ad-spend pipeline', value: '$84k', icon: <FiTrendingUp className="h-4 w-4" /> },
-    ],
-    challenge: 'Cold lists were returning sub-1% click rates, and lead lists had high bounce rates due to outdated data sheets.',
-    solution: 'Developed localized prospect lists using advanced scraping tools. Integrated automated sequences containing highly personalized pain-point summaries and easy booking links.',
-  },
-  {
-    id: 3,
-    title: 'Luna Premium Cosmetics CRO',
-    category: 'Shopify Management',
-    image: '/portfolio_shopify.png',
-    desc: 'User experience optimization and product landing page redesign for an international beauty storefront.',
-    metrics: [
-      { label: 'Conversion Lift', value: '+42.5%', icon: <FiTrendingUp className="h-4 w-4" /> },
-      { label: 'Store ROAS', value: '4.8x', icon: <FiTarget className="h-4 w-4" /> },
-      { label: 'Cart Drop-off', value: '-18%', icon: <FiActivity className="h-4 w-4" /> },
-    ],
-    challenge: 'Heavy ad spend was driving high traffic volume, but the site suffered a steep 88% abandonment rate at the shipping details step.',
-    solution: 'Re-designed product listings, added dynamic psychology-based social badges next to checkout triggers, optimized images, and enabled instant checkout steps.',
-  },
-  {
-    id: 4,
-    title: 'Omnichannel Scale Blueprint',
-    category: 'Digital Marketing Strategy',
-    image: '/portfolio_strategy.png',
-    desc: 'Psychology-led marketing strategy mapping, coordinating paid social, search ad flows, and email CRM loops.',
-    metrics: [
-      { label: 'Average Campaign ROAS', value: '5.2x', icon: <FiTrendingUp className="h-4 w-4" /> },
-      { label: 'Budget scale', value: '3.0x', icon: <FiActivity className="h-4 w-4" /> },
-      { label: 'Server API Match', value: '100%', icon: <FiTarget className="h-4 w-4" /> },
-    ],
-    challenge: 'Ad campaigns were overlapping in target cohorts, causing bids to cannibalize one another and driving CAC up.',
-    solution: 'Constructed detailed cognitive avatars mapping to different awareness tiers. Formulated tailored creative ads for cold, warm, and hot buyer stages.',
-  },
-];
-
-type ProjectType = typeof projects[number];
 
 export default function Portfolio() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [activeProject, setActiveProject] = useState<ProjectType | null>(null);
+  const [photoIndex, setPhotoIndex] = useState<number | null>(null);
 
-  const filteredProjects = selectedCategory === 'All'
-    ? projects
-    : projects.filter(p => p.category === selectedCategory);
+  const openLightbox = (index: number) => {
+    setPhotoIndex(index);
+  };
+
+  const closeLightbox = () => {
+    setPhotoIndex(null);
+  };
+
+  const showNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (photoIndex !== null) {
+      setPhotoIndex((photoIndex + 1) % previewImages.length);
+    }
+  };
+
+  const showPrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (photoIndex !== null) {
+      setPhotoIndex((photoIndex - 1 + previewImages.length) % previewImages.length);
+    }
+  };
 
   return (
     <section id="portfolio" className="relative py-24 md:py-32 bg-[#03001e]">
@@ -109,161 +66,124 @@ export default function Portfolio() {
           >
             Featured Case Studies
           </motion.h2>
+          <p className="font-sans text-sm text-white/50 mt-4">
+            Recent Campaigns & Store Performance Results
+          </p>
           <div className="h-1 w-20 bg-[#ff758f] mx-auto mt-4 rounded-full" />
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2.5 rounded-full font-sans text-xs font-semibold uppercase tracking-wider transition-all duration-300 cursor-pointer border ${
-                selectedCategory === category
-                  ? 'bg-gradient-to-r from-[#ff007f] to-[#730099] border-transparent text-white shadow-[0_4px_15px_rgba(255,0,127,0.3)]'
-                  : 'bg-white/5 border-white/5 text-white/70 hover:bg-white/10 hover:text-white'
-              }`}
+        {/* 2x2 Grid of Preview Images */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          {previewImages.map((imgUrl, idx) => (
+            <motion.div
+              key={idx}
+              className="relative aspect-video rounded-3xl overflow-hidden glass border border-white/5 group cursor-zoom-in"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.15 }}
+              onClick={() => openLightbox(idx)}
+              whileHover={{ y: -4 }}
             >
-              {category}
-            </button>
+              {/* Product Image */}
+              <Image
+                src={imgUrl}
+                alt={`Featured Work ${idx + 1}`}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              
+              {/* Dark Hover Overlay */}
+              <div className="absolute inset-0 bg-[#0c0423]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="h-12 w-12 rounded-full border border-[#ff758f]/40 bg-[#ff758f]/10 flex items-center justify-center text-white scale-75 group-hover:scale-100 transition-transform duration-300">
+                  <FiZoomIn className="h-6 w-6" />
+                </div>
+              </div>
+
+              {/* Tag indicator bottom left */}
+              <div className="absolute bottom-6 left-6 px-4 py-1.5 rounded-xl bg-[#03001e]/60 backdrop-blur-sm border border-white/5 text-xs font-bold text-white/80">
+                Featured Case 0{idx + 1}
+              </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Masonry Grid */}
-        <motion.div 
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
-              <motion.div
-                layout
-                key={project.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.5 }}
-                className="relative overflow-hidden rounded-3xl glass border border-white/5 group aspect-video cursor-pointer"
-                onClick={() => setActiveProject(project)}
-              >
-                {/* Product Image */}
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                
-                {/* Dark Hover Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#03001e] via-[#03001e]/60 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
+        {/* See More Option Button */}
+        <div className="flex justify-center mt-12">
+          <Link href="/work">
+            <MagneticButton>
+              <div className="px-8 py-4 rounded-full bg-gradient-to-r from-[#ff007f] to-[#730099] text-white font-semibold text-sm tracking-wider uppercase shadow-[0_0_25px_rgba(255,0,127,0.3)] flex items-center gap-2 cursor-pointer">
+                See More Work
+                <FiArrowRight className="h-4 w-4" />
+              </div>
+            </MagneticButton>
+          </Link>
+        </div>
 
-                {/* Hover Text Details */}
-                <div className="absolute bottom-0 left-0 right-0 p-8 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <span className="text-[10px] uppercase font-bold text-[#ff758f] tracking-widest mb-2 block">
-                    {project.category}
-                  </span>
-                  <h3 className="font-display font-bold text-2xl text-white group-hover:text-[#ff758f] transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                  <p className="font-sans text-xs text-white/60 mt-3 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                    {project.desc}
-                  </p>
-                  
-                  {/* Click to expand pill */}
-                  <div className="mt-6 inline-flex items-center gap-1.5 text-xs text-white font-bold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
-                    <span>View Case Study</span>
-                    <FiExternalLink className="h-3.5 w-3.5" />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-
-        {/* Modal Overlay Case Study */}
-        <AnimatePresence>
-          {activeProject && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#03001e]/85 backdrop-blur-md"
-              onClick={() => setActiveProject(null)}
-            >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                transition={{ duration: 0.4 }}
-                className="relative max-w-4xl w-full max-h-[85vh] overflow-y-auto glass-premium rounded-3xl border border-[#ff758f]/20 p-6 md:p-10 text-left"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {/* Close Button */}
-                <button
-                  onClick={() => setActiveProject(null)}
-                  className="absolute top-6 right-6 p-2 rounded-full bg-white/5 text-white/70 hover:bg-white/10 hover:text-white transition-all cursor-pointer z-20"
-                >
-                  <FiX className="h-5 w-5" />
-                </button>
-
-                {/* Grid details */}
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mt-4">
-                  {/* Image Display */}
-                  <div className="md:col-span-6 relative aspect-video w-full rounded-2xl overflow-hidden border border-white/5">
-                    <Image
-                      src={activeProject.image}
-                      alt={activeProject.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-
-                  {/* Top Text Meta */}
-                  <div className="md:col-span-6 flex flex-col justify-center">
-                    <span className="text-xs uppercase font-bold text-[#ff758f] tracking-widest">
-                      {activeProject.category}
-                    </span>
-                    <h3 className="font-display font-black text-3xl text-white mt-2 leading-tight">
-                      {activeProject.title}
-                    </h3>
-                    <p className="font-sans text-sm text-white/70 mt-4 leading-relaxed">
-                      {activeProject.desc}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Metrics ribbon */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-b border-white/5 py-8 my-8">
-                  {activeProject.metrics.map((metric) => (
-                    <div key={metric.label} className="glass p-4 rounded-xl flex items-center gap-4">
-                      <div className="h-10 w-10 rounded-lg bg-[#ff758f]/10 flex items-center justify-center text-[#ff758f]">
-                        {metric.icon}
-                      </div>
-                      <div>
-                        <span className="text-[10px] text-white/40 uppercase tracking-widest font-semibold block">{metric.label}</span>
-                        <span className="font-display font-bold text-lg text-white mt-0.5 block">{metric.value}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Challenge & Solution details */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
-                  <div>
-                    <h4 className="font-display font-bold text-[#ff758f] text-base mb-3 uppercase tracking-wider">The Challenge</h4>
-                    <p className="font-sans text-white/70 leading-relaxed">{activeProject.challenge}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-display font-bold text-purple-400 text-base mb-3 uppercase tracking-wider">The Psychology-Driven Solution</h4>
-                    <p className="font-sans text-white/70 leading-relaxed">{activeProject.solution}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
+
+      {/* Lightbox Modal Overlay */}
+      <AnimatePresence>
+        {photoIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#03001e]/95 backdrop-blur-sm select-none"
+            onClick={closeLightbox}
+          >
+            {/* Close Button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-6 right-6 p-3 rounded-full bg-white/5 text-white/75 hover:bg-white/10 hover:text-white transition-all cursor-pointer z-50 border border-white/5"
+            >
+              <FiX className="h-5 w-5" />
+            </button>
+
+            {/* Left Prev Button */}
+            <button
+              onClick={showPrev}
+              className="absolute left-6 p-4 rounded-full bg-white/5 text-white/75 hover:bg-white/10 hover:text-white transition-all cursor-pointer z-50 border border-white/5 hidden md:block"
+            >
+              <FiChevronLeft className="h-6 w-6" />
+            </button>
+
+            {/* Right Next Button */}
+            <button
+              onClick={showNext}
+              className="absolute right-6 p-4 rounded-full bg-white/5 text-white/75 hover:bg-white/10 hover:text-white transition-all cursor-pointer z-50 border border-white/5 hidden md:block"
+            >
+              <FiChevronRight className="h-6 w-6" />
+            </button>
+
+            {/* Image display container */}
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              className="relative w-full max-w-4xl h-[75vh] flex justify-center items-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={previewImages[photoIndex]}
+                alt="Enlarged Case Study"
+                fill
+                className="object-contain"
+                sizes="100vw"
+                priority
+              />
+            </motion.div>
+
+            {/* Footer index and mobile swipe instructions */}
+            <div className="absolute bottom-6 left-0 right-0 text-center text-xs text-white/50">
+              <span className="font-semibold text-white/80">{photoIndex + 1}</span> of {previewImages.length}
+              <div className="md:hidden mt-2 text-[10px]">Tap background to close.</div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

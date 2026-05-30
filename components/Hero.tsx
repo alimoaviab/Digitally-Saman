@@ -2,7 +2,23 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { FiTrendingUp, FiTarget, FiDollarSign, FiArrowRight } from 'react-icons/fi';
+import { FiArrowRight, FiTarget, FiTrendingUp, FiBriefcase } from 'react-icons/fi';
+import MagneticButton from './MagneticButton';
+import AnimatedCounter from './AnimatedCounter';
+
+const badges = [
+  '📈 Meta and Google Ads',
+  '🎵 TikTok Ads',
+  '🛍 Shopify',
+  '🎯 Lead Gen',
+  '📱 Social Media',
+];
+
+const stats = [
+  { value: 4, suffix: '+', label: 'Years Exp.' },
+  { value: 50, suffix: '+', label: 'Clients' },
+  { value: 3, suffix: '×', label: 'Avg ROI' },
+];
 
 export default function Hero() {
   const handleScrollToSection = (id: string) => {
@@ -64,7 +80,7 @@ export default function Hero() {
             {/* Glowing Pill Tag */}
             <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full glass border border-[#ff758f]/20 text-[#ff758f] font-sans text-xs font-semibold uppercase tracking-wider mb-6">
               <span className="h-1.5 w-1.5 rounded-full bg-[#ff007f] animate-pulse" />
-              Psychology-Driven Marketing
+              ✦ Digital Marketing Expert · Rawalpindi
             </span>
           </motion.div>
 
@@ -78,44 +94,68 @@ export default function Hero() {
             <span className="gradient-text glow-text-pink">Clicks.</span>
           </motion.h1>
 
-          <motion.h2
-            className="font-sans text-xl md:text-2xl font-semibold tracking-wide text-white/90 mb-4"
+          <motion.p
+            className="font-sans text-base md:text-lg text-white/70 leading-relaxed max-w-xl mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
           >
-            Your Growth Partner In Digital Success
-          </motion.h2>
-
-          <motion.p
-            className="font-sans text-base md:text-lg text-white/70 leading-relaxed max-w-xl mb-10"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
-          >
-            I transform digital presence into measurable business growth through psychology-driven marketing strategies and data-backed execution.
+            I transform your digital presence into tangible, measurable success. Smart strategies. Sustainable growth. Real results.
           </motion.p>
 
+          {/* Badges Ribbon */}
+          <motion.div 
+            className="flex flex-wrap gap-2.5 mb-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            {badges.map((badge, idx) => (
+              <span key={idx} className="text-xs px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/5 font-sans font-medium text-white/90">
+                {badge}
+              </span>
+            ))}
+          </motion.div>
+
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center"
+            className="flex flex-col sm:flex-row gap-5 items-stretch sm:items-center mb-12"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
           >
-            <button
-              onClick={() => handleScrollToSection('contact')}
-              className="px-8 py-4 rounded-full bg-gradient-to-r from-[#ff007f] to-[#730099] text-white font-semibold text-sm tracking-wider uppercase shadow-[0_0_25px_rgba(255,0,127,0.3)] hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2 cursor-pointer"
-            >
-              Book A Discovery Call
-              <FiArrowRight className="h-4 w-4" />
-            </button>
-            <button
-              onClick={() => handleScrollToSection('services')}
-              className="px-8 py-4 rounded-full glass border border-white/10 hover:border-[#ff758f]/40 hover:bg-[#ff758f]/5 text-white font-semibold text-sm tracking-wider uppercase transition-all duration-300 flex items-center justify-center cursor-pointer"
-            >
-              View My Services
-            </button>
+            <MagneticButton>
+              <button
+                onClick={() => handleScrollToSection('contact')}
+                className="px-8 py-4 rounded-full bg-gradient-to-r from-[#ff007f] to-[#730099] text-white font-semibold text-sm tracking-wider uppercase shadow-[0_0_25px_rgba(255,0,127,0.3)] flex items-center justify-center gap-2 cursor-pointer h-full"
+              >
+                Start Working Together
+                <FiArrowRight className="h-4 w-4" />
+              </button>
+            </MagneticButton>
+            <MagneticButton>
+              <button
+                onClick={() => handleScrollToSection('services')}
+                className="px-8 py-4 rounded-full glass border border-white/10 hover:border-[#ff758f]/40 hover:bg-[#ff758f]/5 text-white font-semibold text-sm tracking-wider uppercase transition-all duration-300 flex items-center justify-center cursor-pointer h-full"
+              >
+                Explore Services
+              </button>
+            </MagneticButton>
           </motion.div>
+
+          {/* Stats Ribbon */}
+          <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/5 max-w-md">
+            {stats.map((stat, idx) => (
+              <div key={idx}>
+                <div className="h-10 block">
+                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                </div>
+                <span className="text-[10px] uppercase font-bold text-white/40 tracking-wider block mt-1">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+
         </div>
 
         {/* Right Content - Artwork & Widgets */}
@@ -129,7 +169,7 @@ export default function Hero() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-[#730099]/20 to-transparent z-10 pointer-events-none group-hover:opacity-0 transition-opacity duration-500" />
             <Image
-              src="/branding_artwork.png"
+              src="/WhatsApp Image 2026-05-30 at 22.07.42 (1).jpeg"
               alt="Digitally Saman Branding Artwork"
               fill
               priority
@@ -150,15 +190,15 @@ export default function Hero() {
               <FiTarget className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-[10px] text-white/50 uppercase tracking-wider font-semibold">Conversion Rate</p>
+              <p className="text-[10px] text-white/50 uppercase tracking-wider font-semibold">Average ROAS</p>
               <div className="flex items-baseline gap-2">
-                <span className="font-display font-bold text-lg text-white">3.85%</span>
-                <span className="text-xs text-green-400 font-semibold flex items-center">+1.2%</span>
+                <span className="font-display font-bold text-lg text-white">3.0x+</span>
+                <span className="text-xs text-green-400 font-semibold flex items-center">+1.5x</span>
               </div>
             </div>
           </motion.div>
 
-          {/* Floating Widget 2: ROAS */}
+          {/* Floating Widget 2: Reach */}
           <motion.div
             className="absolute bottom-10 right-0 sm:right-4 glass border border-[#730099]/30 p-4 rounded-2xl flex items-center gap-3 shadow-[0_8px_32px_rgba(0,0,0,0.5)] z-20"
             initial={{ opacity: 0, x: 30, y: -20 }}
@@ -167,35 +207,18 @@ export default function Hero() {
             whileHover={{ y: -5, transition: { duration: 0.2 } }}
           >
             <div className="h-10 w-10 rounded-xl bg-[#730099]/20 flex items-center justify-center text-purple-300">
-              <FiDollarSign className="h-5 w-5" />
+              <FiBriefcase className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-[10px] text-white/50 uppercase tracking-wider font-semibold">Average ROAS</p>
+              <p className="text-[10px] text-white/50 uppercase tracking-wider font-semibold">Total Campaigns</p>
               <div className="flex items-baseline gap-2">
-                <span className="font-display font-bold text-lg text-white">4.8x</span>
-                <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-semibold">Meta Ads</span>
+                <span className="font-display font-bold text-lg text-white">150+</span>
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-semibold">Meta & Google</span>
               </div>
             </div>
           </motion.div>
 
-          {/* Floating Widget 3: Social Growth */}
-          <motion.div
-            className="absolute bottom-1/3 left-[-20px] sm:left-[-10px] glass border border-white/10 p-3 px-4 rounded-2xl flex items-center gap-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.5)] z-20"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            whileHover={{ y: -5, transition: { duration: 0.2 } }}
-          >
-            <div className="h-8 w-8 rounded-lg bg-green-500/10 flex items-center justify-center text-green-400">
-              <FiTrendingUp className="h-4.5 w-4.5" />
-            </div>
-            <div>
-              <span className="font-display font-bold text-sm text-white">+148%</span>
-              <span className="text-[10px] text-white/50 ml-1.5">Social Reach</span>
-            </div>
-          </motion.div>
-
-          {/* Floating Widget 4: Conversion Indicators */}
+          {/* Floating Widget 3: Conversion Indicators */}
           <motion.div
             className="absolute top-12 right-2 sm:right-10 glass border border-white/10 p-3 rounded-2xl flex items-center gap-2 shadow-[0_8px_32px_rgba(0,0,0,0.5)] z-20 text-xs text-white/80"
             initial={{ opacity: 0, scale: 0.8 }}

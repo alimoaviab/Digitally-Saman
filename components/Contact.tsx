@@ -2,25 +2,33 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiMapPin, FiPhone, FiMail, FiMessageCircle, FiInstagram, FiFacebook, FiSend } from 'react-icons/fi';
+import { FiMapPin, FiPhone, FiMail, FiMessageCircle, FiInstagram, FiFacebook, FiLinkedin, FiSend } from 'react-icons/fi';
+import confetti from 'canvas-confetti';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    website: '',
-    service: 'Social Media Management',
+    service: 'Social Media Management & Marketing',
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate submission
+    
+    // Confetti burst from screen center-bottom
+    confetti({
+      particleCount: 150,
+      spread: 80,
+      origin: { y: 0.6 },
+      colors: ['#ff007f', '#730099', '#ff758f', '#ffffff'],
+    });
+
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
-      setFormData({ name: '', email: '', website: '', service: 'Social Media Management', message: '' });
+      setFormData({ name: '', email: '', service: 'Social Media Management & Marketing', message: '' });
     }, 4000);
   };
 
@@ -56,35 +64,35 @@ export default function Contact() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                Let&apos;s Grow Your Brand Together
+                Get In Touch
               </motion.h2>
 
               <p className="font-sans text-sm text-white/60 leading-relaxed mb-10">
-                Ready to transform your digital footprint into measurable revenue? Reach out today to schedule your 15-minute discovery audit. We will analyze your bottlenecks and formulate a plan.
+                Ready to transform your digital presence? Reach out through any channel — I respond fast and love talking strategy.
               </p>
 
               {/* Information Cards */}
               <div className="space-y-6 mb-10">
                 <div className="flex items-center gap-4">
                   <div className="h-11 w-11 rounded-xl bg-white/5 flex items-center justify-center text-[#ff758f] shrink-0 border border-white/5">
-                    <FiMail className="h-5 w-5" />
+                    <FiPhone className="h-5 w-5" />
                   </div>
                   <div>
-                    <span className="text-[10px] text-white/40 uppercase tracking-widest font-semibold block">Email Me</span>
-                    <a href={emailUrl} className="font-sans font-bold text-sm text-white hover:text-[#ff758f] transition-colors">
-                      digitallysaman@gmail.com
+                    <span className="text-[10px] text-white/40 uppercase tracking-widest font-semibold block">Phone / WhatsApp</span>
+                    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="font-sans font-bold text-sm text-white hover:text-[#ff758f] transition-colors">
+                      +92 330 4617934
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-4">
                   <div className="h-11 w-11 rounded-xl bg-white/5 flex items-center justify-center text-[#ff758f] shrink-0 border border-white/5">
-                    <FiPhone className="h-5 w-5" />
+                    <FiMail className="h-5 w-5" />
                   </div>
                   <div>
-                    <span className="text-[10px] text-white/40 uppercase tracking-widest font-semibold block">Call / WhatsApp</span>
-                    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="font-sans font-bold text-sm text-white hover:text-[#ff758f] transition-colors">
-                      +92 330 4617934
+                    <span className="text-[10px] text-white/40 uppercase tracking-widest font-semibold block">Email</span>
+                    <a href={emailUrl} className="font-sans font-bold text-sm text-white hover:text-[#ff758f] transition-colors">
+                      digitallysaman@gmail.com
                     </a>
                   </div>
                 </div>
@@ -138,7 +146,7 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="glass p-8 md:p-10 rounded-3xl border border-white/5 space-y-6 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#ff758f]/5 rounded-bl-full pointer-events-none" />
               
-              <h3 className="font-display font-bold text-xl text-white mb-6">Send A Direct Message</h3>
+              <h3 className="font-display font-bold text-xl text-white mb-6">Let&apos;s Build Something Great</h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {/* Name */}
@@ -157,7 +165,7 @@ export default function Contact() {
 
                 {/* Email */}
                 <div className="flex flex-col">
-                  <label htmlFor="form-email" className="text-[10px] text-white/40 uppercase tracking-widest font-semibold mb-2">Work Email</label>
+                  <label htmlFor="form-email" className="text-[10px] text-white/40 uppercase tracking-widest font-semibold mb-2">Your Email</label>
                   <input
                     id="form-email"
                     type="email"
@@ -170,40 +178,26 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {/* Website */}
-                <div className="flex flex-col">
-                  <label htmlFor="form-website" className="text-[10px] text-white/40 uppercase tracking-widest font-semibold mb-2">Website Link (Optional)</label>
-                  <input
-                    id="form-website"
-                    type="url"
-                    value={formData.website}
-                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                    placeholder="e.g. www.brand.com"
-                    className="bg-white/5 border border-white/5 focus:border-[#ff758f] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 outline-none transition-colors"
-                  />
-                </div>
-
-                {/* Selected Service */}
-                <div className="flex flex-col">
-                  <label htmlFor="form-service" className="text-[10px] text-white/40 uppercase tracking-widest font-semibold mb-2">Interest Service</label>
-                  <select
-                    id="form-service"
-                    value={formData.service}
-                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    className="bg-[#0c0423] border border-white/5 focus:border-[#ff758f] rounded-xl px-4 py-3 text-sm text-white outline-none transition-colors cursor-pointer"
-                  >
-                    <option value="Social Media Management">Social Media Management</option>
-                    <option value="Performance Marketing">Performance Marketing</option>
-                    <option value="Shopify Store Management">Shopify Store Management</option>
-                    <option value="Lead Generation & Outreach">Lead Generation & Outreach</option>
-                  </select>
-                </div>
+              {/* Selected Service */}
+              <div className="flex flex-col">
+                <label htmlFor="form-service" className="text-[10px] text-white/40 uppercase tracking-widest font-semibold mb-2">Service Interested In</label>
+                <select
+                  id="form-service"
+                  value={formData.service}
+                  onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                  className="bg-[#0c0423] border border-white/5 focus:border-[#ff758f] rounded-xl px-4 py-3 text-sm text-white outline-none transition-colors cursor-pointer"
+                >
+                  <option value="Social Media Management & Marketing">Social Media Management & Marketing</option>
+                  <option value="Performance Marketing (Google & TikTok Ads)">Performance Marketing (Google & TikTok Ads)</option>
+                  <option value="Shopify Store Management">Shopify Store Management</option>
+                  <option value="Lead Generation & Outreach (B2B / B2C)">Lead Generation & Outreach (B2B / B2C)</option>
+                  <option value="Multiple Services">Multiple Services</option>
+                </select>
               </div>
 
               {/* Message */}
               <div className="flex flex-col">
-                <label htmlFor="form-message" className="text-[10px] text-white/40 uppercase tracking-widest font-semibold mb-2">Your Message / Brand Goals</label>
+                <label htmlFor="form-message" className="text-[10px] text-white/40 uppercase tracking-widest font-semibold mb-2">Your Message</label>
                 <textarea
                   id="form-message"
                   required
@@ -225,7 +219,7 @@ export default function Contact() {
                   <span>Message Sent Successfully!</span>
                 ) : (
                   <>
-                    <span>Submit Strategic Inquiry</span>
+                    <span>Send Message ✦</span>
                     <FiSend className="h-4 w-4" />
                   </>
                 )}
@@ -252,6 +246,15 @@ export default function Contact() {
                     aria-label="Facebook Profile"
                   >
                     <FiFacebook className="h-4.5 w-4.5" />
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/samannaz-digitalmarketer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="h-9 w-9 rounded-full bg-white/5 flex items-center justify-center text-white/70 hover:bg-blue-700 hover:text-white transition-all cursor-pointer border border-white/5"
+                    aria-label="LinkedIn Profile"
+                  >
+                    <FiLinkedin className="h-4.5 w-4.5" />
                   </a>
                 </div>
               </div>
