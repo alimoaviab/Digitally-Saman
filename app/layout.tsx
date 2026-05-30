@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
-import { Syne, Plus_Jakarta_Sans } from 'next/font/google';
+import { Poppins, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import SmoothScroll from '@/components/SmoothScroll';
 import CustomCursor from '@/components/CustomCursor';
 
-const syne = Syne({
-  variable: '--font-syne',
+const poppins = Poppins({
+  variable: '--font-poppins',
   subsets: ['latin'],
+  weight: ['400', '600', '700', '800', '900'],
   display: 'swap',
 });
 
@@ -79,7 +80,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${syne.variable} scroll-smooth`}
+      className={`${plusJakarta.variable} ${poppins.variable} scroll-smooth`}
     >
       <body className="min-h-screen text-white bg-[#03001e] antialiased">
         <SmoothScroll>
