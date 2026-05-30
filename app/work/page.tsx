@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowLeft, FiX, FiChevronLeft, FiChevronRight, FiZoomIn } from 'react-icons/fi';
 
 const images = [
+  '/WhatsApp Image 2026-05-30 at 22.07.42 (1).jpeg',
   '/WhatsApp Image 2026-05-30 at 22.07.42 (2).jpeg',
   '/WhatsApp Image 2026-05-30 at 22.07.42.jpeg',
   '/WhatsApp Image 2026-05-30 at 22.07.43 (1).jpeg',

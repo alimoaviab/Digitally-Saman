@@ -169,7 +169,7 @@ export default function Hero() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-[#730099]/20 to-transparent z-10 pointer-events-none group-hover:opacity-0 transition-opacity duration-500" />
             <Image
-              src="/WhatsApp Image 2026-05-30 at 22.07.42 (1).jpeg"
+              src="/branding_artwork.png"
               alt="Digitally Saman Branding Artwork"
               fill
               priority
