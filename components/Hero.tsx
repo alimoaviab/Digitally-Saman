@@ -15,7 +15,7 @@ const badges = [
 ];
 
 const stats = [
-  { value: 4, suffix: '+', label: 'Years Exp.' },
+  { value: 2, suffix: '+', label: 'Years Exp.' },
   { value: 50, suffix: '+', label: 'Clients' },
   { value: 3, suffix: '×', label: 'Avg ROI' },
 ];
@@ -160,7 +160,7 @@ export default function Hero() {
         </div>
 
         {/* Right Content - Artwork & Widgets */}
-        <div className="lg:col-span-6 relative flex justify-center items-center h-[500px] lg:h-[600px] w-full">
+        <div className="hidden lg:flex lg:col-span-6 relative justify-center items-center h-[500px] lg:h-[600px] w-full">
           {/* Main Artwork Container */}
           <motion.div
             className="relative w-[340px] h-[340px] sm:w-[450px] sm:h-[450px] rounded-3xl overflow-hidden glass-premium flex justify-center items-center group"

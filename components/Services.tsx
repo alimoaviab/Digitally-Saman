@@ -19,10 +19,11 @@ const services = [
     accentColor: '#ff758f',
   },
   {
-    title: 'Performance Marketing (Google & TikTok Ads)',
+    title: 'Performance Marketing (Meta, Google & TikTok Ads)',
     icon: <FiAward className="h-6 w-6" />,
-    desc: 'Expert-level paid advertising on Google Search, Display Networks, and TikTok. From campaign setup and optimization to conversions and retargeting — I make your budget work hard.',
+    desc: 'Expert-level paid advertising on Meta (Facebook & Instagram), Google Search, Display Networks, and TikTok. From campaign setup and optimization to conversions and retargeting — I make your budget work hard.',
     features: [
+      'Meta Ads',
       'Google Ads',
       'TikTok Ads',
       'Retargeting',

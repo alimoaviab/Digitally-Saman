@@ -188,7 +188,7 @@ export default function Contact() {
                   className="bg-[#0c0423] border border-white/5 focus:border-[#ff758f] rounded-xl px-4 py-3 text-sm text-white outline-none transition-colors cursor-pointer"
                 >
                   <option value="Social Media Management & Marketing">Social Media Management & Marketing</option>
-                  <option value="Performance Marketing (Google & TikTok Ads)">Performance Marketing (Google & TikTok Ads)</option>
+                  <option value="Performance Marketing (Meta, Google & TikTok Ads)">Performance Marketing (Meta, Google & TikTok Ads)</option>
                   <option value="Shopify Store Management">Shopify Store Management</option>
                   <option value="Lead Generation & Outreach (B2B / B2C)">Lead Generation & Outreach (B2B / B2C)</option>
                   <option value="Multiple Services">Multiple Services</option>
